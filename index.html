@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fahmi Heykal - Software Engineer Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <div class="logo">Fahmi Heykal</div>
+      <button id="menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+      </button>
+      <nav id="navbar">
+        <ul class="nav-links">
+          <li><a href="#about" class="active">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="container about-section">
+      <div class="profile-photo">
+        <img src="foto_asli.jpg" alt="Foto Fahmi Heykal" />
+      </div>
+      <div class="profile-info">
+        <h1>Hello, I'm Fahmi Heykal</h1>
+        <p>
+          Fresh graduate software engineer with a growth mindset, ready to learn, adapt, and contribute to software development lifecycle.
+        </p>
+        <div class="btn-group">
+          <a href="#contact" class="btn btn-primary">Get in Touch</a>
+          <a href="Curriculum_Vitae_Fahmi_Heykal.pdf" target="_blank" class="btn btn-secondary">Download My CV</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="container section">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <span class="skill">JavaScript</span>
+        <span class="skill">Python</span>
+        <span class="skill">Golang</span>
+        <span class="skill">Git & GitHub</span>
+        <span class="skill">REST APIs</span>
+        <span class="skill">PostgreSQL</span>
+      </div>
+    </section>
+
+    <section id="projects" class="container section">
+      <h2>Projects</h2>
+
+      <article class="project">
+        <h3>Todo App REST API</h3>
+        <p>API backend untuk aplikasi Todo List dengan fitur lengkap CRUD menggunakan Golang dan PostgreSQL.</p>
+        <p><strong>Tech :</strong> Golang, Gin, GORM, PostgreSQL</p>
+        <p><strong>Features :</strong></p>
+        <ul>
+          <li>Create, Read, Update, Delete tasks</li>
+          <li>Validasi input data</li>
+          <li>RESTful API design</li>
+        </ul>
+        <p><strong>Sample Code (Go) :</strong></p>
+        <pre><code>func CreateTodo(c *gin.Context) {
+  var todo Todo
+  if err := c.ShouldBindJSON(&todo); err != nil {
+    c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+    return
+  }
+  DB.Create(&todo)
+  c.JSON(http.StatusCreated, todo)
+}</code></pre>
+        <p><a href="https://github.com/FahmiHeykal/todo-app-go" target="_blank" class="project-link">GitHub Repository</a></p>
+      </article>
+
+      <article class="project">
+        <h3>Task Manager API</h3>
+        <p>API sederhana menggunakan Python dan Flask dengan penyimpanan file JSON untuk prototipe cepat.</p>
+        <p><strong>Tech :</strong> Python, Flask, JSON</p>
+        <p><strong>Features :</strong></p>
+        <ul>
+          <li>Tambah, lihat daftar tugas</li>
+          <li>Validasi input sederhana</li>
+          <li>Mudah dikembangkan untuk prototype</li>
+        </ul>
+        <p><strong>Sample Code (Python) :</strong></p>
+        <pre><code>@app.post("/tasks")
+def add_task():
+    data = request.json
+    if not all(k in data for k in ("task", "priority", "deadline")):
+        return jsonify({"error": "Missing fields"}), 400
+    tasks = load_tasks()
+    tambah_tugas(tasks, data["task"], data["priority"], data["deadline"])
+    save_tasks(tasks)
+    return jsonify({"message": "Task added"}), 201
+</code></pre>
+        <p><a href="https://github.com/FahmiHeykal/flask-todo-app" target="_blank" class="project-link">GitHub Repository</a></p>
+      </article>
+
+      <article class="project">
+        <h3>Real-Time Chat Service</h3>
+        <p>API chatting real-time dengan WebSocket dan database PostgreSQL untuk menyimpan pesan.</p>
+        <p><strong>Tech :</strong> Golang, Gorilla WebSocket, PostgreSQL</p>
+        <p><strong>Features :</strong></p>
+        <ul>
+          <li>WebSocket untuk komunikasi real-time</li>
+          <li>Menyimpan pesan ke database</li>
+          <li>Broadcast pesan ke semua client</li>
+        </ul>
+        <p><strong>Sample Code (Go) :</strong></p>
+        <pre><code>func handleConnections(w http.ResponseWriter, r *http.Request) {
+  ws, err := upgrader.Upgrade(w, r, nil)
+  if err != nil {
+    log.Println("Upgrade failed:", err)
+    return
+  }
+  defer ws.Close()
+
+  clients[ws] = true
+
+  for {
+    var msg Message
+    err := ws.ReadJSON(&msg)
+    if err != nil {
+      delete(clients, ws)
+      break
+    }
+
+    _, err = db.Exec("INSERT INTO messages (username, message, timestamp) VALUES ($1, $2, NOW())", msg.Username, msg.Message)
+    if err != nil {
+      log.Println("DB error:", err)
+      continue
+    }
+
+    broadcast <- msg
+  }
+}</code></pre>
+        <p><a href="https://github.com/FahmiHeykal/real-time_chat_api" target="_blank" class="project-link">GitHub Repository</a></p>
+      </article>
+    </section>
+
+    <section id="education" class="container section">
+      <h2>Education</h2>
+      <p><strong>Bachelor of Computer Science</strong><br />Universitas Bhayangkara Jakarta Raya, 2020 - 2024</p>
+    </section>
+
+ <section id="contact" class="container section">
+  <h2>Contact</h2>
+  <p>Interested in working together or have a question?</p>
+  <p>
+    <a href="mailto:fahmiheykal09@gmail.com" title="Email">
+      <i class="fas fa-envelope fa-2x"></i>
+    </a>
+    &nbsp;&nbsp;
+    <a href="https://www.linkedin.com/in/fahmiheykal/" target="_blank" title="LinkedIn">
+      <i class="fab fa-linkedin fa-2x"></i>
+    </a>
+    &nbsp;&nbsp;
+    <a href="https://github.com/FahmiHeykal" target="_blank" title="GitHub">
+      <i class="fab fa-github fa-2x"></i>
+    </a>
+  </p>
+ </section>
+ </main>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const navbar = document.getElementById("navbar");
+
+    menuToggle.addEventListener("click", () => {
+      navbar.classList.toggle("nav-open");
+      menuToggle.classList.toggle("open");
+    });
+
+    // Close menu when clicking a link (optional)
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navbar.classList.remove("nav-open");
+        menuToggle.classList.remove("open");
+      });
+    });
+  </script>
+</body>
+</html>
