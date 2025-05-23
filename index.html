@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Backend Engineer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Fahmi Heykal</h1>
+            <p>Backend Engineer</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#skills">Keahlian</a></li>
+                <li><a href="#projects">Proyek</a></li>
+                <li><a href="#contact">Kontak</a></li>
+                <li><a href="assets/Curriculum_Vitae_Fahmi_Heykal.pdf" download class="btn-download">Download CV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<section id="about" class="section-dark">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-img">
+        <img src="assets/foto_formal.png" alt="Profile Picture">
+      </div>
+      <div class="about-text" style="text-align: justify;">
+        <h2 class="about-title">Tentang Saya</h2>
+        <p>
+          Fresh graduate yang antusias di bidang pengembangan backend, dengan pengalaman membangun berbagai API dan layanan backend menggunakan Golang dan Python. Terampil dalam mengelola dan mengoptimalkan database relasional seperti PostgreSQL dan MySQL. Memiliki ketertarikan kuat terhadap pemecahan masalah kompleks serta pengembangan solusi yang efisien, skalabel, dan dapat diandalkan. Siap berkontribusi dalam tim teknologi yang dinamis dan terus berkembang.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="skills" class="section-light">
+        <div class="container">
+            <h2>Keahlian Teknis</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Bahasa Pemrograman</h3>
+                    <ul>
+                        <li>Golang</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Database</h3>
+                    <ul>
+                        <li>PostgreSQL</li>
+                        <li>MySQL</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-server"></i>
+                    <h3>Tools</h3>
+                    <ul>
+                        <li>Gin</li>
+                        <li>Flask</li>
+                        <li>FastAPI</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section-dark">
+        <div class="container">
+            <h2>PROYEK</h2>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Todo App API dengan Golang & Gin</h3>
+                    <a href="https://github.com/FahmiHeykal/todo-app-go" target="_blank" class="btn-github">
+                        <i class="fab fa-github"></i> Lihat di GitHub
+                    </a>
+                </div>
+                <div class="project-content">
+                    <p>Proyek sederhana Todo List API yang dibuat menggunakan Golang dan framework Gin.</p>
+                    </p>Fitur :</p>
+                    <ul>
+                        <li>CRUD operations untuk todo items</li>
+                        <li>Penyimpanan data di PostgreSQL menggunakan GORM</li>
+                        <li>Endpoint RESTful API</li>
+                    </ul>
+                    <div class="code-snippet">
+                        <pre><code class="language-go">// Contoh kode untuk mendapatkan semua todo
+func GetTodos(c *gin.Context) {
+    var todos []Todo
+    DB.Find(&todos)
+    c.JSON(http.StatusOK, todos)
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Real-Time Chat API dengan WebSocket</h3>
+                    <a href="https://github.com/FahmiHeykal/real-time_chat_api" target="_blank" class="btn-github">
+                        <i class="fab fa-github"></i> Lihat di GitHub
+                    </a>
+                </div>
+                <div class="project-content">
+                    <p>Chat API real-time menggunakan Golang, WebSocket, dan PostgreSQL.</p>
+                    </p>Fitur :</p>
+                    <ul>
+                        <li>Komunikasi real-time dengan WebSocket</li>
+                        <li>Penyimpanan pesan di PostgreSQL</li>
+                        <li>Riwayat chat terakhir (50 pesan)</li>
+                    </ul>
+                    <div class="code-snippet">
+                        <pre><code class="language-go">// Handle koneksi WebSocket
+func handleConnections(w http.ResponseWriter, r *http.Request) {
+    ws, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Println("Error upgrading connection:", err)
+        return
+    }
+    defer ws.Close()
+
+    mutex.Lock()
+    clients[ws] = true
+    mutex.Unlock()
+
+    for {
+        var msg Message
+        err := ws.ReadJSON(&msg)
+        if err != nil {
+            log.Println("Error membaca pesan:", err)
+            mutex.Lock()
+            delete(clients, ws)
+            mutex.Unlock()
+            break
+        }
+        broadcast <- msg
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Aplikasi Todo dengan Flask</h3>
+                    <a href="https://github.com/FahmiHeykal/flask-todo-app" target="_blank" class="btn-github">
+                        <i class="fab fa-github"></i> Lihat di GitHub
+                    </a>
+                </div>
+                <div class="project-content">
+                    <p>Aplikasi Todo sederhana menggunakan Python Flask.</p>
+                    </p>Fitur :</p>
+                    <ul>
+                        <li>CRUD operations untuk tugas</li>
+                        <li>Pencarian tugas</li>
+                        <li>Sorting berdasarkan prioritas</li>
+                    </ul>
+                    <div class="code-snippet">
+                        <pre><code class="language-python">@app.post("/tasks")
+def post_task():
+    data = request.json
+    tasks = load_tasks()
+    if not data.get("task") or not data.get("priority") or not data.get("deadline"):
+        return jsonify({"error": "Missing required fields"}), 400
+    tambah_tugas(tasks, data["task"], data["priority"], data["deadline"])
+    return jsonify({"message": "Tugas ditambahkan"}), 201</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-light">
+        <div class="container">
+            <h2>Hubungi Saya</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> fahmiheykal09@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +62 822-9850-3138</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/fahmiheykal/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/FahmiHeykal" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://x.com/fahmiheykal9?t=HG8LvV-s8n518iYigfUdsg&s=08" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Nama Anda" required>
+                    <input type="email" placeholder="Email Anda" required>
+                    <textarea placeholder="Pesan Anda" required></textarea>
+                    <button type="submit" class="btn-submit">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fahmi Heykal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
